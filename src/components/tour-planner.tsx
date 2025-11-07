@@ -1,37 +1,17 @@
 'use client';
 
-import { useState } from 'react';
-import { useToast } from '@/hooks/use-toast';
-import { TourItineraryOutput } from '@/ai/flows/generate-tour-itinerary';
-import { generateItineraryAction } from '@/app/actions';
+import { useRouter } from 'next/navigation';
 import ItineraryForm from './itinerary-form';
-import ItineraryDisplay from './itinerary-display';
+import { useState } from 'react';
 
 export default function TourPlanner() {
-  const [itinerary, setItinerary] = useState<TourItineraryOutput | null>(null);
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
 
   const handleFormSubmit = async (values: any) => {
     setIsLoading(true);
-    setItinerary(null);
-
-    const result = await generateItineraryAction(values);
-
-    setIsLoading(false);
-    if (result.success && result.data) {
-      setItinerary(result.data);
-      toast({
-        title: 'Itinerary Generated!',
-        description: 'Your personalized tour plan is ready below.',
-      });
-    } else {
-      toast({
-        variant: 'destructive',
-        title: 'Error Generating Itinerary',
-        description: result.error || 'An unknown error occurred.',
-      });
-    }
+    const params = new URLSearchParams(values);
+    router.push(`/itinerary?${params.toString()}`);
   };
 
   return (
@@ -40,17 +20,6 @@ export default function TourPlanner() {
         <div className="mt-[-150px] relative z-20">
             <ItineraryForm onSubmit={handleFormSubmit} isLoading={isLoading} />
         </div>
-        {isLoading && (
-            <div className="mt-12 text-center">
-                <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-                <p className="mt-4 text-muted-foreground">Generating your dream trip...</p>
-            </div>
-        )}
-        {itinerary && (
-            <div className="mt-12 animate-fade-in-up">
-                <ItineraryDisplay itinerary={itinerary} />
-            </div>
-        )}
       </div>
     </section>
   );
