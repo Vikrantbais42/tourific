@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Button } from './ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { ArrowRight } from 'lucide-react';
@@ -9,12 +8,9 @@ export default function HeroSection() {
   return (
     <section className="relative h-[600px] flex items-center justify-center text-center text-white">
       {heroImage && (
-        <Image
-          src={heroImage.imageUrl}
-          alt={heroImage.description}
-          fill
-          className="object-cover"
-          priority
+         <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+          style={{ backgroundImage: `url(${heroImage.imageUrl})` }}
           data-ai-hint={heroImage.imageHint}
         />
       )}
