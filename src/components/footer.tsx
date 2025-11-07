@@ -3,23 +3,23 @@ import Link from 'next/link';
 export default function Footer() {
   return (
     <footer className="border-t bg-background">
-      <div className="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+      <div className="container mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
           <p className="text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} Tourific. All rights reserved.
           </p>
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-4">
             <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              About Us
+              About
             </Link>
             <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Contact Us
+              Contact
             </Link>
             <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Privacy Policy
+              Privacy
             </Link>
             <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Terms & Conditions
+              Terms
             </Link>
           </div>
         </div>

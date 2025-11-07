@@ -37,15 +37,7 @@ export default function TourPlanner() {
   return (
     <section id="planner" className="py-16 sm:py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-headline font-bold text-foreground sm:text-4xl">
-                Plan Your Next Adventure
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-                Fill out the details below, and our AI will create a customized itinerary just for you.
-            </p>
-        </div>
-        <div className="mt-12 max-w-4xl mx-auto">
+        <div className="mt-[-150px] relative z-20">
             <ItineraryForm onSubmit={handleFormSubmit} isLoading={isLoading} />
         </div>
         {isLoading && (

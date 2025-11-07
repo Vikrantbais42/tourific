@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Mountain, Building2, Sun, Sparkles } from 'lucide-react';
 
 const formSchema = z.object({
@@ -32,9 +32,10 @@ export default function ItineraryForm({ onSubmit, isLoading }: ItineraryFormProp
   });
 
   return (
-    <Card className="shadow-lg">
-        <CardHeader>
-            <CardTitle className="font-headline text-center">Itinerary Details</CardTitle>
+    <Card className="shadow-lg border-2 border-primary/20">
+        <CardHeader className="text-center">
+            <CardTitle className="font-poppins text-2xl">Plan Your Next Adventure</CardTitle>
+            <CardDescription>Fill out the details below to get started.</CardDescription>
         </CardHeader>
         <CardContent>
             <Form {...form}>

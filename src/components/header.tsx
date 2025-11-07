@@ -1,4 +1,5 @@
 import { Sailboat } from 'lucide-react';
+import { Button } from './ui/button';
 
 export default function Header() {
   return (
@@ -7,8 +8,14 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <Sailboat className="h-8 w-8 text-primary" />
-            <h1 className="text-2xl font-headline font-bold text-foreground">Tourific</h1>
+            <h1 className="text-2xl font-bold text-foreground font-poppins">Tourific</h1>
           </div>
+          <nav className="hidden md:flex items-center space-x-6">
+             <Button variant="ghost">Features</Button>
+             <Button variant="ghost">Pricing</Button>
+             <Button variant="ghost">Contact</Button>
+          </nav>
+          <Button>Get Started</Button>
         </div>
       </div>
     </header>
