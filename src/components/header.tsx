@@ -16,7 +16,7 @@ export default function Header() {
              <Button variant="ghost" asChild><Link href="#how-it-works">How it Works</Link></Button>
              <Button variant="ghost">Contact</Button>
           </nav>
-          <Button asChild>
+          <Button className="bg-accent hover:bg-accent/90 text-accent-foreground" asChild>
             <Link href="#planner">Get Started</Link>
           </Button>
         </div>
