@@ -18,7 +18,7 @@ export type PopularPlacesInput = z.infer<typeof PopularPlacesInputSchema>;
 const PlaceSchema = z.object({
     name: z.string().describe('The name of the popular place.'),
     description: z.string().describe('A short, engaging description of the place.'),
-    imageUrl: z.string().url().describe('A stunning, high-quality image URL from images.unsplash.com for the place.'),
+    imageUrl: z.string().url().describe('A stunning, high-quality, and directly usable image URL from images.unsplash.com for the place. This URL must be a hotlink to the image file, not the Unsplash webpage.'),
     imageHint: z.string().describe('Two or three keywords to find a relevant image for this place, e.g., "Eiffel Tower night".'),
 });
 
@@ -39,7 +39,7 @@ const prompt = ai.definePrompt({
 
 Location: {{{location}}}
 
-For each place, provide a name, a short description, a hint for finding a suitable image, and a valid, high-resolution image URL from images.unsplash.com. The image URL MUST be directly usable.
+For each place, provide a name, a short description, a hint for finding a suitable image, and a valid, high-resolution, and directly usable (hotlink) image URL from images.unsplash.com. The image URL MUST be a direct link to the image file itself.
 `,
 });
 
