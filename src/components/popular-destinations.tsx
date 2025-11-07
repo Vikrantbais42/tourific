@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -19,7 +19,7 @@ const formSchema = z.object({
 
 export default function PopularDestinations() {
   const [places, setPlaces] = useState<PopularPlacesOutput | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -44,9 +44,18 @@ export default function PopularDestinations() {
   };
 
   // Fetch initial data for Paris on component mount
-  useState(() => {
-    onSubmit({ location: 'Paris' });
-  });
+  useEffect(() => {
+    async function fetchInitialData() {
+        const result = await getPopularPlacesAction({ location: 'Paris' });
+        setIsLoading(false);
+        if (result.success && result.data) {
+            setPlaces(result.data);
+        } else {
+            setError(result.error || 'Could not load popular destinations.');
+        }
+    }
+    fetchInitialData();
+  }, []);
 
   return (
     <section id="popular-destinations" className="py-16 sm:py-24 bg-secondary">
@@ -76,12 +85,12 @@ export default function PopularDestinations() {
             />
             <Button type="submit" disabled={isLoading} className="bg-primary hover:bg-primary/90">
                 <Search className="mr-2 h-4 w-4" />
-                {isLoading ? 'Searching...' : 'Search'}
+                {isLoading && form.formState.isSubmitting ? 'Searching...' : 'Search'}
             </Button>
           </form>
         </Form>
 
-        {isLoading && (
+        {isLoading && !places && (
           <div className="text-center">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
             <p className="mt-4 text-muted-foreground">Discovering amazing places...</p>
