@@ -6,10 +6,10 @@ export default function HeroSection() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
 
   return (
-    <section className="relative h-[600px] flex items-center justify-center text-center text-white">
+    <section className="relative h-[600px] flex items-center justify-center text-center text-white overflow-hidden">
       {heroImage && (
          <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat parallax"
           style={{ backgroundImage: `url(${heroImage.imageUrl})` }}
           data-ai-hint={heroImage.imageHint}
         />
