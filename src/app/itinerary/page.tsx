@@ -9,6 +9,7 @@ import ItineraryDisplay from '@/components/itinerary-display';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import FlightDetails from '@/components/flight-details';
 
 function ItineraryGenerator() {
   const searchParams = useSearchParams();
@@ -18,23 +19,27 @@ function ItineraryGenerator() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currency, setCurrency] = useState('INR');
+  const [location, setLocation] = useState('');
 
   useEffect(() => {
     const budget = searchParams.get('budget');
     const days = searchParams.get('days');
-    const location = searchParams.get('location');
+    const locationParam = searchParams.get('location');
     const tourType = searchParams.get('tourType');
     const currencyParam = searchParams.get('currency');
 
     if (currencyParam) {
       setCurrency(currencyParam);
     }
+    if (locationParam) {
+      setLocation(locationParam);
+    }
 
-    if (budget && days && location && tourType) {
+    if (budget && days && locationParam && tourType) {
       const values = {
         budget: Number(budget),
         days: Number(days),
-        location,
+        location: locationParam,
         tourType,
         currency: currencyParam || 'INR',
       };
@@ -85,8 +90,9 @@ function ItineraryGenerator() {
         </Card>
       )}
       {itinerary && !isLoading && (
-        <div className="animate-fade-in-up">
+        <div className="animate-fade-in-up space-y-8">
           <ItineraryDisplay itinerary={itinerary} currency={currency} />
+          <FlightDetails location={location} currency={currency} />
         </div>
       )}
     </main>

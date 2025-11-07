@@ -4,6 +4,7 @@
 import { generateTourItinerary, TourItineraryInput } from '@/ai/flows/generate-tour-itinerary';
 import { recommendTourAlternatives, RecommendTourAlternativesInput } from '@/ai/flows/recommend-tour-alternatives';
 import { getPopularPlaces, PopularPlacesInput } from '@/ai/flows/get-popular-places';
+import { generateFlightDetails, FlightDetailsInput } from '@/ai/flows/generate-flight-details';
 import { z } from 'zod';
 
 const tourItineraryInputSchema = z.object({
@@ -52,6 +53,17 @@ export async function recommendAlternativesAction(input: RecommendTourAlternativ
 export async function getPopularPlacesAction(input: PopularPlacesInput) {
     try {
         const result = await getPopularPlaces(input);
+        return { success: true, data: result };
+    } catch (error) {
+        console.error(error);
+        const message = error instanceof Error ? error.message : 'An unexpected error occurred.';
+        return { success: false, error: message };
+    }
+}
+
+export async function generateFlightDetailsAction(input: FlightDetailsInput) {
+    try {
+        const result = await generateFlightDetails(input);
         return { success: true, data: result };
     } catch (error) {
         console.error(error);
