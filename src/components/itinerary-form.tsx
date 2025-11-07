@@ -8,7 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Mountain, Building2, Sun, Sparkles } from 'lucide-react';
+import { User, Users, Home, Heart, Sparkles } from 'lucide-react';
 
 const formSchema = z.object({
   budget: z.coerce.number().min(1, 'Budget is required.'),
@@ -67,14 +67,20 @@ export default function ItineraryForm({ onSubmit, isLoading }: ItineraryFormProp
                             </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                            <SelectItem value="adventure">
-                                <div className="flex items-center gap-2"><Mountain /> Adventure</div>
+                            <SelectItem value="solo">
+                                <div className="flex items-center gap-2"><User /> Solo Trip</div>
                             </SelectItem>
-                            <SelectItem value="cultural">
-                                <div className="flex items-center gap-2"><Building2 /> Cultural</div>
+                            <SelectItem value="friends">
+                                <div className="flex items-center gap-2"><Users /> Friends Trip</div>
                             </SelectItem>
-                            <SelectItem value="relaxation">
-                                <div className="flex items-center gap-2"><Sun /> Relaxation</div>
+                            <SelectItem value="family">
+                                <div className="flex items-center gap-2"><Home /> Family Trip</div>
+                            </SelectItem>
+                             <SelectItem value="honeymoon">
+                                <div className="flex items-center gap-2"><Heart /> Honeymoon Trip</div>
+                            </SelectItem>
+                             <SelectItem value="couple">
+                                <div className="flex items-center gap-2"><Users /> Couple Trip</div>
                             </SelectItem>
                             </SelectContent>
                         </Select>
