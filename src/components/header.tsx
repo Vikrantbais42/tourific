@@ -1,5 +1,6 @@
 import { Sailboat } from 'lucide-react';
 import { Button } from './ui/button';
+import Link from 'next/link';
 
 export default function Header() {
   return (
@@ -10,8 +11,9 @@ export default function Header() {
             <Sailboat className="h-8 w-8 text-primary" />
             <h1 className="text-2xl font-bold text-foreground font-poppins">Tourific</h1>
           </div>
-          <nav className="hidden md:flex items-center space-x-6">
-             <Button variant="ghost">Features</Button>
+          <nav className="hidden md:flex items-center space-x-2">
+             <Button variant="ghost" asChild><Link href="#features">Features</Link></Button>
+             <Button variant="ghost" asChild><Link href="#how-it-works">How it Works</Link></Button>
              <Button variant="ghost">Pricing</Button>
              <Button variant="ghost">Contact</Button>
           </nav>
