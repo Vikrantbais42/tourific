@@ -48,7 +48,7 @@ export default function HowItWorks() {
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-background rounded-full flex items-center justify-center font-bold text-primary text-xl shadow-md md:hidden">
                         {index + 1}
                     </div>
-                    <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-background rounded-full items-center justify-center font-bold text-primary text-xl shadow-md">
+                    <div className="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-background rounded-full items-center justify-center font-bold text-primary text-xl shadow-md">
                         {index + 1}
                     </div>
                     <div className={`md:w-5/12 md:pl-16 ${index % 2 !== 0 ? 'md:order-first' : ''}`}>
