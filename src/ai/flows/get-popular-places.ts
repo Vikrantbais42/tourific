@@ -18,6 +18,7 @@ export type PopularPlacesInput = z.infer<typeof PopularPlacesInputSchema>;
 const PlaceSchema = z.object({
     name: z.string().describe('The name of the popular place.'),
     description: z.string().describe('A short, engaging description of the place.'),
+    imageUrl: z.string().url().describe('A stunning, high-quality image URL from images.unsplash.com for the place.'),
     imageHint: z.string().describe('Two or three keywords to find a relevant image for this place, e.g., "Eiffel Tower night".'),
 });
 
@@ -34,11 +35,11 @@ const prompt = ai.definePrompt({
   name: 'getPopularPlacesPrompt',
   input: {schema: PopularPlacesInputSchema},
   output: {schema: PopularPlacesOutputSchema},
-  prompt: `You are a travel expert. Based on the following location, provide a list of the top 5 most popular tourist attractions.
+  prompt: `You are a travel expert. Based on the following location, provide a list of the top 3 most popular tourist attractions.
 
 Location: {{{location}}}
 
-For each place, provide a name, a short description, and a hint for finding a suitable image.
+For each place, provide a name, a short description, a hint for finding a suitable image, and a valid, high-resolution image URL from images.unsplash.com. The image URL MUST be directly usable.
 `,
 });
 

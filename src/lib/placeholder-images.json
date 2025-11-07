@@ -29,24 +29,6 @@
       "description": "An illustrated or creative map.",
       "imageUrl": "https://images.unsplash.com/photo-1516546453174-5e1098a4b4af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx0cmF2ZWwlMjBtYXB8ZW58MHx8fHwxNzYyNDk2Njg4fDA&ixlibrb-4.1.0&q=80&w=1080",
       "imageHint": "travel map"
-    },
-    {
-      "id": "popular-1",
-      "description": "Eiffel Tower in Paris at sunset.",
-      "imageUrl": "https://images.unsplash.com/photo-1502602898657-3e91760c0341?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "imageHint": "Eiffel Tower"
-    },
-    {
-      "id": "popular-2",
-      "description": "The Louvre Museum with its iconic pyramid.",
-      "imageUrl": "https://images.unsplash.com/photo-1599184497674-72ce83567889?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "imageHint": "Louvre Museum"
-    },
-    {
-      "id": "popular-3",
-      "description": "Notre-Dame Cathedral in Paris.",
-      "imageUrl": "https://images.unsplash.com/photo-1597022421396-7493b1695e8e?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "imageHint": "Notre Dame"
     }
   ]
 }
