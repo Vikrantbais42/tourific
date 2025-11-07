@@ -25,7 +25,7 @@ export default function HeroSection() {
         </p>
         <div className="mt-10">
             <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold" asChild>
-                <Link href="#planner">
+                <Link href="/#planner">
                     Get Started <ArrowRight className="ml-2" />
                 </Link>
             </Button>
