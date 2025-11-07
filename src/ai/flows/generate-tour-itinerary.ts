@@ -22,6 +22,7 @@ export type TourItineraryInput = z.infer<typeof TourItineraryInputSchema>;
 
 const ActivitySchema = z.object({
     time: z.string().describe('The time of day for the activity (e.g., "Morning", "Afternoon", "9:00 AM").'),
+    title: z.string().describe('A short, catchy title for the activity.'),
     description: z.string().describe('A detailed description of the activity.'),
     cost: z.number().optional().describe('The estimated cost of the activity in the specified currency.'),
 });
@@ -53,7 +54,7 @@ Number of Days: {{{days}}}
 Location: {{{location}}}
 Tour Type: {{{tourType}}}
 
-Create a daily itinerary with activities and estimated costs in {{{currency}}}. Ensure the output is a valid JSON object matching the provided schema. Be creative with the titles and descriptions.
+Create a daily itinerary with activities (including a short title for each), and estimated costs in {{{currency}}}. Ensure the output is a valid JSON object matching the provided schema. Be creative with the titles and descriptions.
 `,
 });
 

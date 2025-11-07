@@ -74,7 +74,7 @@ export default function ItineraryDisplay({ itinerary, currency }: ItineraryDispl
                             <Card key={actIndex} className="shadow-md hover:shadow-lg transition-shadow ml-4 relative before:content-[''] before:absolute before:left-[-25px] before:top-8 before:w-4 before:h-4 before:bg-primary before:rounded-full before:border-4 before:border-background">
                                 <CardHeader>
                                      <div className="flex justify-between items-start">
-                                        <CardTitle className="text-xl font-semibold mb-2">{activity.description.split('.')[0]}</CardTitle>
+                                        <CardTitle className="text-xl font-semibold mb-2">{activity.title}</CardTitle>
                                          {activity.cost !== undefined && activity.cost > 0 && (
                                             <div className="flex items-center gap-2 text-sm font-medium bg-secondary text-secondary-foreground px-3 py-1 rounded-full">
                                                 <Wallet className="w-4 h-4 text-muted-foreground"/>
