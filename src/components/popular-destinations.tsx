@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -112,7 +113,7 @@ export default function PopularDestinations() {
                     <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
                          <div className="relative w-full h-56">
                             <Image
-                                src={`https://picsum.photos/seed/${place.name.replace(/\s/g, '')}/${index}/600/400`}
+                                src={`https://picsum.photos/seed/${place.name.replace(/\s/g, '')}/600/400`}
                                 alt={place.name}
                                 fill
                                 className="object-cover"
