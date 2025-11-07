@@ -1,6 +1,7 @@
 import { Button } from './ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function HeroSection() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
@@ -23,8 +24,10 @@ export default function HeroSection() {
           Tell us your dreams, and we'll weave them into an unforgettable itinerary. With Tourific, your next adventure is just a few clicks away.
         </p>
         <div className="mt-10">
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold">
-                Get Started <ArrowRight className="ml-2" />
+            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold" asChild>
+                <Link href="#planner">
+                    Get Started <ArrowRight className="ml-2" />
+                </Link>
             </Button>
         </div>
       </div>

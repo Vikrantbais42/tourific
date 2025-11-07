@@ -17,7 +17,9 @@ export default function Header() {
              <Button variant="ghost">Pricing</Button>
              <Button variant="ghost">Contact</Button>
           </nav>
-          <Button>Get Started</Button>
+          <Button asChild>
+            <Link href="#planner">Get Started</Link>
+          </Button>
         </div>
       </div>
     </header>
