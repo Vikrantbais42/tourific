@@ -3,7 +3,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Sailboat } from 'lucide-react';
 
 export default function Footer() {
-  const footerImage = PlaceHolderImages.find(p => p.id === 'feature-map');
+  const footerImage = PlaceHolderImages.find(p => p.id === 'hero-background');
 
   return (
     <footer
