@@ -41,13 +41,14 @@ export default function FeaturesSection() {
                 Tourific is packed with features to make travel planning effortless and enjoyable.
             </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-            {features.map((feature) => {
+        <div className="space-y-16">
+            {features.map((feature, index) => {
                 const featureImage = PlaceHolderImages.find(p => p.id === feature.imageId);
+                const isReversed = index % 2 !== 0;
                 return(
-                    <div key={feature.name} className="flex flex-col md:flex-row gap-6 items-center">
+                    <div key={feature.name} className={`flex flex-col md:flex-row gap-8 lg:gap-12 items-center ${isReversed ? 'md:flex-row-reverse' : ''}`}>
                          {featureImage && (
-                            <div className="relative w-full h-60 md:w-5/12 rounded-lg overflow-hidden shadow-lg">
+                            <div className="relative w-full h-80 md:w-1/2 rounded-lg overflow-hidden shadow-xl">
                                 <Image
                                     src={featureImage.imageUrl}
                                     alt={featureImage.description}
@@ -57,12 +58,12 @@ export default function FeaturesSection() {
                                 />
                             </div>
                         )}
-                        <div className="md:w-7/12">
-                            <div className="flex items-center gap-3 mb-2">
-                                <div className="p-2 bg-primary text-primary-foreground rounded-full">{feature.icon}</div>
-                                <h3 className="text-xl font-poppins font-semibold">{feature.name}</h3>
+                        <div className="md:w-1/2">
+                            <div className="flex items-center gap-4 mb-3">
+                                <div className="p-3 bg-primary text-primary-foreground rounded-full">{feature.icon}</div>
+                                <h3 className="text-2xl font-poppins font-semibold">{feature.name}</h3>
                             </div>
-                            <p className="text-muted-foreground">{feature.description}</p>
+                            <p className="text-lg text-muted-foreground">{feature.description}</p>
                         </div>
                     </div>
                 );
