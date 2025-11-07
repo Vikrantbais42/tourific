@@ -10,7 +10,7 @@
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 
-export const FlightDetailsInputSchema = z.object({
+const FlightDetailsInputSchema = z.object({
   location: z.string().describe('The destination location for the flights.'),
   currency: z.string().describe('The currency for the flight prices.'),
 });
@@ -26,7 +26,7 @@ const FlightSchema = z.object({
   stops: z.number().describe('The number of stops during the flight.'),
 });
 
-export const FlightDetailsOutputSchema = z.object({
+const FlightDetailsOutputSchema = z.object({
   flights: z.array(FlightSchema).describe('A list of sample flight options.'),
 });
 export type FlightDetailsOutput = z.infer<typeof FlightDetailsOutputSchema>;
