@@ -21,14 +21,32 @@
     {
       "id": "feature-budget",
       "description": "Image of piggy bank or calculator representing budget.",
-      "imageUrl": "https://images.unsplash.com/photo-1485149316715-2cce76e6ee74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxidWRnZXQlMjB0cmF2ZWx8ZW58MHx8fHwxNzYyNTQxNDIyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1485149316715-2cce76e6ee74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxidWRnZXQlMjB0cmF2ZWx8ZW58MHx8fHwxNzYyNTQxNDIyfDA&ixlibrb-4.1.0&q=80&w=1080",
       "imageHint": "budget travel"
     },
     {
       "id": "feature-map",
       "description": "An illustrated or creative map.",
-      "imageUrl": "https://images.unsplash.com/photo-1516546453174-5e1098a4b4af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx0cmF2ZWwlMjBtYXB8ZW58MHx8fHwxNzYyNDk2Njg4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1516546453174-5e1098a4b4af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx0cmF2ZWwlMjBtYXB8ZW58MHx8fHwxNzYyNDk2Njg4fDA&ixlibrb-4.1.0&q=80&w=1080",
       "imageHint": "travel map"
+    },
+    {
+      "id": "popular-1",
+      "description": "Popular tourist destination.",
+      "imageUrl": "https://images.unsplash.com/photo-1649375353142-2945788d1c95?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwb3B1bGFyJTIwZGVzdGluYXRpb258ZW58MHx8fHwxNzYyNTQyNjczfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "popular destination"
+    },
+    {
+      "id": "popular-2",
+      "description": "Another popular tourist destination.",
+      "imageUrl": "https://images.unsplash.com/photo-1621019346120-ef77ab00331d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8dG91cmlzdCUyMHNwb3R8ZW58MHx8fHwxNzYyNTQyNjczfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tourist spot"
+    },
+    {
+      "id": "popular-3",
+      "description": "A third popular tourist destination.",
+      "imageUrl": "https://images.unsplash.com/photo-1729956436615-490a5f8da139?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxmYW1vdXMlMjBsYW5kbWFya3xlbnwwfHx8fDE3NjI1NDI2NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "famous landmark"
     }
   ]
 }

@@ -31,39 +31,21 @@ export default function HowItWorks() {
             Get your personalized travel plan in three simple steps.
           </p>
         </div>
-        <div className="relative">
-            <div className="absolute left-1/2 -ml-px w-px bg-border h-full hidden md:block"></div>
-            <div className="space-y-12 md:space-y-16">
+        <div className="grid md:grid-cols-3 gap-8">
             {steps.map((step, index) => (
-                <div key={index} className="relative flex flex-col md:flex-row items-center gap-8">
-                    <div className="md:w-5/12 flex justify-center md:justify-end md:pr-16 order-1 md:order-none">
-                        <div className={`text-center ${index % 2 !== 0 ? 'md:order-last' : ''}`}>
-                            <div className="flex items-center justify-center w-20 h-20 rounded-full bg-background shadow-md mb-4 mx-auto">
-                                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-primary/10">
-                                    {step.icon}
-                                </div>
-                            </div>
+                <div key={index} className="text-center">
+                     <div className="flex items-center justify-center w-20 h-20 rounded-full bg-background shadow-md mb-4 mx-auto">
+                        <div className="flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 relative">
+                            {step.icon}
+                            <span className="absolute -top-2 -right-2 flex items-center justify-center w-8 h-8 bg-primary text-primary-foreground rounded-full font-bold text-sm">
+                                {index + 1}
+                            </span>
                         </div>
                     </div>
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-background rounded-full flex items-center justify-center font-bold text-primary text-xl shadow-md md:hidden">
-                        {index + 1}
-                    </div>
-                    <div className="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-background rounded-full items-center justify-center font-bold text-primary text-xl shadow-md">
-                        {index + 1}
-                    </div>
-                    <div className={`md:w-5/12 md:pl-16 ${index % 2 !== 0 ? 'md:order-first' : ''}`}>
-                        <Card className="shadow-md hover:shadow-lg transition-shadow">
-                            <CardHeader>
-                                <CardTitle className="font-poppins">{step.title}</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-muted-foreground">{step.description}</p>
-                            </CardContent>
-                        </Card>
-                    </div>
+                    <h3 className="text-xl font-poppins font-semibold mb-2">{step.title}</h3>
+                    <p className="text-muted-foreground">{step.description}</p>
                 </div>
             ))}
-            </div>
         </div>
       </div>
     </section>
