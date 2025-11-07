@@ -113,7 +113,7 @@ export default function PopularDestinations() {
                     <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
                          <div className="relative w-full h-56">
                             <Image
-                                src={`https://picsum.photos/seed/${place.name.replace(/\s/g, '')}/600/400`}
+                                src={`https://placehold.co/600x400?text=${encodeURIComponent(place.name)}`}
                                 alt={place.name}
                                 fill
                                 className="object-cover"
