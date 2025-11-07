@@ -14,13 +14,23 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './
 
 type ItineraryDisplayProps = {
   itinerary: TourItineraryOutput;
+  currency: string;
 };
 
-export default function ItineraryDisplay({ itinerary }: ItineraryDisplayProps) {
+const currencySymbols: { [key: string]: string } = {
+    USD: '$',
+    EUR: '€',
+    GBP: '£',
+    INR: '₹',
+};
+
+
+export default function ItineraryDisplay({ itinerary, currency }: ItineraryDisplayProps) {
     const [preferences, setPreferences] = useState('');
     const [alternatives, setAlternatives] = useState<RecommendTourAlternativesOutput | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const { toast } = useToast();
+    const currencySymbol = currencySymbols[currency] || currency;
 
     const handleGetAlternatives = async () => {
         setIsLoading(true);
@@ -67,8 +77,8 @@ export default function ItineraryDisplay({ itinerary }: ItineraryDisplayProps) {
                                         <span className="text-xl font-semibold">{activity.description.split('.')[0]}</span>
                                         {activity.cost !== undefined && activity.cost > 0 && (
                                             <div className="flex items-center gap-2 text-sm font-medium bg-secondary text-secondary-foreground px-3 py-1 rounded-full">
-                                                <DollarSign className="w-4 h-4" />
-                                                <span>${activity.cost}</span>
+                                                <span>{currencySymbol}</span>
+                                                <span>{activity.cost}</span>
                                             </div>
                                         )}
                                     </CardTitle>

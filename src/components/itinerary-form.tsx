@@ -15,6 +15,7 @@ const formSchema = z.object({
   days: z.coerce.number().int().min(1, 'Number of days must be at least 1.'),
   location: z.string().min(2, 'Location is required.'),
   tourType: z.string().min(1, 'Please select a tour type.'),
+  currency: z.string().optional(),
 });
 
 type ItineraryFormProps = {
@@ -28,6 +29,7 @@ export default function ItineraryForm({ onSubmit, isLoading }: ItineraryFormProp
     defaultValues: {
       location: '',
       tourType: '',
+      currency: 'INR',
     },
   });
 
@@ -101,19 +103,44 @@ export default function ItineraryForm({ onSubmit, isLoading }: ItineraryFormProp
                         </FormItem>
                     )}
                     />
-                    <FormField
-                    control={form.control}
-                    name="budget"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Budget (USD)</FormLabel>
-                        <FormControl>
-                            <Input type="number" placeholder="e.g., 2000" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                    />
+                    <div className="flex gap-4">
+                        <FormField
+                            control={form.control}
+                            name="currency"
+                            render={({ field }) => (
+                                <FormItem className="w-1/3">
+                                <FormLabel>Currency</FormLabel>
+                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <FormControl>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select currency" />
+                                    </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        <SelectItem value="INR">INR</SelectItem>
+                                        <SelectItem value="USD">USD</SelectItem>
+                                        <SelectItem value="EUR">EUR</SelectItem>
+                                        <SelectItem value="GBP">GBP</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                        control={form.control}
+                        name="budget"
+                        render={({ field }) => (
+                            <FormItem className="flex-grow">
+                            <FormLabel>Budget</FormLabel>
+                            <FormControl>
+                                <Input type="number" placeholder="e.g., 50000" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                            </FormItem>
+                        )}
+                        />
+                    </div>
                 </div>
                 <Button type="submit" disabled={isLoading} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-lg py-6">
                     {isLoading ? 'Generating...' : 'Create My Itinerary'}

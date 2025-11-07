@@ -11,6 +11,7 @@ const tourItineraryInputSchema = z.object({
   days: z.coerce.number().int().positive(),
   location: z.string().min(1),
   tourType: z.string().min(1),
+  currency: z.string().optional().default('INR'),
 });
 
 async function saveSearchQuery(query: TourItineraryInput) {

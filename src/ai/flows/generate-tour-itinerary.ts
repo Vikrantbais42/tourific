@@ -12,17 +12,18 @@ import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const TourItineraryInputSchema = z.object({
-  budget: z.number().describe('The budget for the tour in USD.'),
+  budget: z.number().describe('The budget for the tour.'),
   days: z.number().describe('The number of days for the tour.'),
   location: z.string().describe('The location for the tour.'),
   tourType: z.string().describe('The type of tour (e.g., adventure, cultural, relaxation).'),
+  currency: z.string().default('INR').describe('The currency for the budget (e.g., INR, USD).'),
 });
 export type TourItineraryInput = z.infer<typeof TourItineraryInputSchema>;
 
 const ActivitySchema = z.object({
     time: z.string().describe('The time of day for the activity (e.g., "Morning", "Afternoon", "9:00 AM").'),
     description: z.string().describe('A detailed description of the activity.'),
-    cost: z.number().optional().describe('The estimated cost of the activity in USD.'),
+    cost: z.number().optional().describe('The estimated cost of the activity in the specified currency.'),
 });
 
 const DayItinerarySchema = z.object({
@@ -47,12 +48,12 @@ const prompt = ai.definePrompt({
   output: {schema: TourItineraryOutputSchema},
   prompt: `Generate a personalized tour itinerary for a user based on the following criteria:
 
-Budget: {{{budget}}} USD
+Budget: {{{budget}}} {{{currency}}}
 Number of Days: {{{days}}}
 Location: {{{location}}}
 Tour Type: {{{tourType}}}
 
-Create a daily itinerary with activities and estimated costs. Ensure the output is a valid JSON object matching the provided schema. Be creative with the titles and descriptions.
+Create a daily itinerary with activities and estimated costs in {{{currency}}}. Ensure the output is a valid JSON object matching the provided schema. Be creative with the titles and descriptions.
 `,
 });
 

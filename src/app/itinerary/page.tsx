@@ -17,12 +17,18 @@ function ItineraryGenerator() {
   const [itinerary, setItinerary] = useState<TourItineraryOutput | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [currency, setCurrency] = useState('INR');
 
   useEffect(() => {
     const budget = searchParams.get('budget');
     const days = searchParams.get('days');
     const location = searchParams.get('location');
     const tourType = searchParams.get('tourType');
+    const currencyParam = searchParams.get('currency');
+
+    if (currencyParam) {
+      setCurrency(currencyParam);
+    }
 
     if (budget && days && location && tourType) {
       const values = {
@@ -30,6 +36,7 @@ function ItineraryGenerator() {
         days: Number(days),
         location,
         tourType,
+        currency: currencyParam || 'INR',
       };
 
       const generateItinerary = async () => {
@@ -79,7 +86,7 @@ function ItineraryGenerator() {
       )}
       {itinerary && !isLoading && (
         <div className="animate-fade-in-up">
-          <ItineraryDisplay itinerary={itinerary} />
+          <ItineraryDisplay itinerary={itinerary} currency={currency} />
         </div>
       )}
     </main>
