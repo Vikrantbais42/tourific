@@ -1,19 +1,11 @@
 
 'use server';
 
-import { generateTourItinerary, TourItineraryInput } from '@/ai/flows/generate-tour-itinerary';
+import { generateTourItinerary } from '@/ai/flows/generate-tour-itinerary';
 import { recommendTourAlternatives, RecommendTourAlternativesInput } from '@/ai/flows/recommend-tour-alternatives';
 import { getPopularPlaces, PopularPlacesInput } from '@/ai/flows/get-popular-places';
 import { generateFlightDetails, FlightDetailsInput } from '@/ai/flows/generate-flight-details';
-import { z } from 'zod';
-
-const tourItineraryInputSchema = z.object({
-  budget: z.coerce.number().positive(),
-  days: z.coerce.number().int().positive(),
-  location: z.string().min(1),
-  tourType: z.string().min(1),
-  currency: z.string().optional().default('INR'),
-});
+import { tourItineraryInputSchema, TourItineraryInput } from '@/lib/schema';
 
 async function saveSearchQuery(query: TourItineraryInput) {
   // This is a placeholder for persisting the user's search query to a datastore like Firestore.
