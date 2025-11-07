@@ -32,21 +32,21 @@
     },
     {
       "id": "popular-1",
-      "description": "Popular tourist destination.",
-      "imageUrl": "https://images.unsplash.com/photo-1649375353142-2945788d1c95?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwb3B1bGFyJTIwZGVzdGluYXRpb258ZW58MHx8fHwxNzYyNTQyNjczfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "popular destination"
+      "description": "Eiffel Tower in Paris at sunset.",
+      "imageUrl": "https://images.unsplash.com/photo-1502602898657-3e91760c0341?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "Eiffel Tower"
     },
     {
       "id": "popular-2",
-      "description": "Another popular tourist destination.",
-      "imageUrl": "https://images.unsplash.com/photo-1621019346120-ef77ab00331d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8dG91cmlzdCUyMHNwb3R8ZW58MHx8fHwxNzYyNTQyNjczfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "tourist spot"
+      "description": "The Louvre Museum with its iconic pyramid.",
+      "imageUrl": "https://images.unsplash.com/photo-1599184497674-72ce83567889?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "Louvre Museum"
     },
     {
       "id": "popular-3",
-      "description": "A third popular tourist destination.",
-      "imageUrl": "https://images.unsplash.com/photo-1729956436615-490a5f8da139?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxmYW1vdXMlMjBsYW5kbWFya3xlbnwwfHx8fDE3NjI1NDI2NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "famous landmark"
+      "description": "Notre-Dame Cathedral in Paris.",
+      "imageUrl": "https://images.unsplash.com/photo-1597022421396-7493b1695e8e?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "Notre Dame"
     }
   ]
 }

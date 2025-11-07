@@ -13,6 +13,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/
 import { Form, FormControl, FormField, FormItem, FormMessage } from './ui/form';
 import { Search } from 'lucide-react';
 import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const formSchema = z.object({
   location: z.string().min(2, 'Location is required.'),
@@ -57,6 +58,9 @@ export default function PopularDestinations() {
     }
     fetchInitialData();
   }, []);
+
+  // Match popular places with placeholder images
+  const popularImages = PlaceHolderImages.filter(p => p.id.startsWith('popular-'));
 
   return (
     <section id="popular-destinations" className="py-16 sm:py-24 bg-secondary">
@@ -109,11 +113,13 @@ export default function PopularDestinations() {
 
         {places && (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-up">
-                {places.places.slice(0, 3).map((place, index) => (
+                {places.places.slice(0, 3).map((place, index) => {
+                    const image = popularImages[index];
+                    return (
                     <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
                          <div className="relative w-full h-56">
                             <Image
-                                src={`https://placehold.co/600x400?text=${encodeURIComponent(place.name)}`}
+                                src={image.imageUrl}
                                 alt={place.name}
                                 fill
                                 className="object-cover"
@@ -127,7 +133,7 @@ export default function PopularDestinations() {
                             <p className="text-muted-foreground">{place.description}</p>
                         </CardContent>
                     </Card>
-                ))}
+                )})}
             </div>
         )}
 
