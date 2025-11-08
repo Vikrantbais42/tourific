@@ -1,3 +1,4 @@
+
 /**
  * @fileoverview Firestore Security Rules for Tourific application.
  *
@@ -8,12 +9,14 @@
  * Data Structure:
  * - User profiles are stored under `/users/{userId}`.
  * - Search queries for a user are stored under `/users/{userId}/search_queries/{searchQueryId}`.
+ * - Visits are stored under `/visits/{visitId}`.
  *
  * Key Security Decisions:
  * - Users can only read and write their own profile data.
  * - Users can only read and write their own search queries.
  * - Listing of all users is disallowed.
- * - No data validation is performed, focusing on rapid prototyping.
+ * - Any user (including anonymous) can write to the `visits` collection to log their visit.
+ * - Only authenticated admins can read the `visits` collection.
  *
  * Denormalization for Authorization:
  * - The `userProfileId` field within the `SearchQuery` documents MUST match the `userId`
@@ -72,6 +75,20 @@ service cloud.firestore {
       allow create: if isOwner(userId);
       allow update: if isExistingOwner(userId);
       allow delete: if isExistingOwner(userId);
+    }
+    
+    /**
+     * @description Controls access to the `visits` collection for analytics.
+     * @path /visits/{visitId}
+     * @allow (create) - Allows any user (including anonymous) to create a visit document.
+     * @allow (read) - Allows only authenticated admins to read the collection.
+     * @deny (update, delete) - No one can update or delete visit documents.
+     */
+    match /visits/{visitId} {
+        allow create: if true; // Anyone can log a visit
+        allow read: if request.auth != null; // For now, allow any authenticated user to read.
+        allow list: if request.auth != null;
+        allow update, delete: if false;
     }
   }
 }

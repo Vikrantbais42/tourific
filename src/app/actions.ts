@@ -6,13 +6,32 @@ import { recommendTourAlternatives, RecommendTourAlternativesInput } from '@/ai/
 import { getPopularPlaces, PopularPlacesInput } from '@/ai/flows/get-popular-places';
 import { generateFlightDetails, FlightDetailsInput } from '@/ai/flows/generate-flight-details';
 import { tourItineraryInputSchema, TourItineraryInput } from '@/lib/schema';
+import { getFirestore, addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { initializeFirebase } from '@/firebase';
 
 async function saveSearchQuery(query: TourItineraryInput) {
-  // This is a placeholder for persisting the user's search query to a datastore like Firestore.
-  // In a real application, you would initialize your database client here and save the data.
-  console.log('Saving search query to datastore:', query);
-  // Example: await db.collection('searchQueries').add(query);
-  return { success: true };
+  try {
+    const { firestore, auth } = initializeFirebase();
+    const user = auth.currentUser;
+
+    if (user) {
+      const searchQuery = {
+        ...query,
+        userProfileId: user.uid,
+        timestamp: serverTimestamp(),
+      };
+      await addDoc(collection(firestore, `users/${user.uid}/search_queries`), searchQuery);
+      return { success: true };
+    } else {
+      console.log('Anonymous user, not saving search query.');
+      return { success: true };
+    }
+  } catch (error) {
+    console.error('Error saving search query:', error);
+    // Even if saving fails, we should proceed with generating the itinerary
+    return { success: false, error: 'Failed to save search history.' };
+  }
 }
 
 export async function generateItineraryAction(values: unknown) {

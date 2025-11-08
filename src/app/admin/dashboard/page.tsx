@@ -1,14 +1,40 @@
+
+'use client';
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, UserPlus, Activity, LogOut } from "lucide-react";
 import { logout } from "../actions";
 import { Button } from "@/components/ui/button";
+import { useCollection } from '@/firebase/firestore/use-collection';
+import { collection, query, where } from 'firebase/firestore';
+import { useFirestore } from '@/firebase';
+import { useMemo } from 'react';
+
+// Define a type for your visit data for type safety
+type Visit = {
+  timestamp: Date;
+  // Add other relevant fields if you have them
+};
 
 export default function AdminDashboard() {
-  // Placeholder data for the dashboard
+  const firestore = useFirestore();
+
+  // Memoize the queries to prevent re-creation on every render
+  const allVisitsQuery = useMemo(() => collection(firestore, 'visits'), [firestore]);
+  const recentVisitsQuery = useMemo(() => {
+    const oneDayAgo = new Date();
+    oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+    return query(collection(firestore, 'visits'), where('timestamp', '>=', oneDayAgo));
+  }, [firestore]);
+
+  // Fetch the data using the useCollection hook
+  const { data: allVisits, isLoading: isLoadingAll } = useCollection<Visit>(allVisitsQuery);
+  const { data: recentVisits, isLoading: isLoadingRecent } = useCollection<Visit>(recentVisitsQuery);
+
   const stats = {
-    totalUsers: '1,250',
-    newUsers: '150',
-    activeUsers: '800',
+    totalUsers: isLoadingAll ? 'Loading...' : allVisits?.length.toLocaleString() ?? '0',
+    newUsers: '150', // Placeholder, as "new users" is more complex to define
+    activeUsers: isLoadingRecent ? 'Loading...' : recentVisits?.length.toLocaleString() ?? '0',
   };
 
   return (
@@ -39,12 +65,12 @@ export default function AdminDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+                        <CardTitle className="text-sm font-medium">Total Visits</CardTitle>
                         <Users className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                         <div className="text-2xl font-bold">{stats.totalUsers}</div>
-                        <p className="text-xs text-muted-foreground">+20.1% from last month</p>
+                        <p className="text-xs text-muted-foreground">All time visits to the site</p>
                     </CardContent>
                 </Card>
                  <Card>
@@ -59,12 +85,12 @@ export default function AdminDashboard() {
                 </Card>
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Active Users</CardTitle>
+                        <CardTitle className="text-sm font-medium">Active Users (24h)</CardTitle>
                         <Activity className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                         <div className="text-2xl font-bold">{stats.activeUsers}</div>
-                        <p className="text-xs text-muted-foreground">In the last 24 hours</p>
+                        <p className="text-xs text-muted-foreground">Visits in the last 24 hours</p>
                     </CardContent>
                 </Card>
             </div>
