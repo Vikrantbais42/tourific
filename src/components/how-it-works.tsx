@@ -1,19 +1,18 @@
 import { ClipboardList, Wand2, Plane } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 
 const steps = [
   {
-    icon: <ClipboardList className="w-8 h-8 text-primary" />,
+    icon: <ClipboardList className="w-8 h-8 text-accent" />,
     title: 'Share Your Dream',
     description: "Fill out our simple form with your destination, budget, desired pace, and interests. The more we know, the better we can tailor your trip.",
   },
   {
-    icon: <Wand2 className="w-8 h-8 text-primary" />,
+    icon: <Wand2 className="w-8 h-8 text-accent" />,
     title: 'Get AI-Powered Itinerary',
     description: "Our intelligent AI analyzes your preferences to instantly generate a detailed, day-by-day itinerary packed with activities, sights, and dining options.",
   },
   {
-    icon: <Plane className="w-8 h-8 text-primary" />,
+    icon: <Plane className="w-8 h-8 text-accent" />,
     title: 'Customize & Travel',
     description: "Review your plan, request AI-powered alternatives for any part you wish to change, and once it's perfect, pack your bags and embark on your adventure!",
   },
@@ -35,9 +34,9 @@ export default function HowItWorks() {
             {steps.map((step, index) => (
                 <div key={index} className="text-center">
                      <div className="flex items-center justify-center w-20 h-20 rounded-full bg-background shadow-md mb-4 mx-auto">
-                        <div className="flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 relative">
+                        <div className="flex items-center justify-center w-16 h-16 rounded-full bg-accent/10 relative">
                             {step.icon}
-                            <span className="absolute -top-2 -right-2 flex items-center justify-center w-8 h-8 bg-primary text-primary-foreground rounded-full font-bold text-sm">
+                            <span className="absolute -top-2 -right-2 flex items-center justify-center w-8 h-8 bg-accent text-accent-foreground rounded-full font-bold text-sm">
                                 {index + 1}
                             </span>
                         </div>

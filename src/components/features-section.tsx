@@ -60,7 +60,7 @@ export default function FeaturesSection() {
                         )}
                         <div className="md:w-1/2">
                             <div className="flex items-center gap-4 mb-3">
-                                <div className="p-3 bg-primary text-primary-foreground rounded-full">{feature.icon}</div>
+                                <div className="p-3 bg-accent text-accent-foreground rounded-full">{feature.icon}</div>
                                 <h3 className="text-2xl font-poppins font-semibold">{feature.name}</h3>
                             </div>
                             <p className="text-lg text-muted-foreground">{feature.description}</p>
