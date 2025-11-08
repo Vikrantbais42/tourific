@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -5,8 +6,8 @@ import { Users, UserPlus, Activity, LogOut } from "lucide-react";
 import { logout } from "../actions";
 import { Button } from "@/components/ui/button";
 import { useCollection } from '@/firebase/firestore/use-collection';
-import { collection, query, where, getFirestore } from 'firebase/firestore';
-import { useFirestore, useMemoFirebase, useFirebase } from '@/firebase';
+import { collection, query, where } from 'firebase/firestore';
+import { useFirestore, useMemoFirebase, useFirebase, useUser } from '@/firebase';
 import { useEffect } from 'react';
 import { signInAnonymously } from 'firebase/auth';
 
@@ -19,33 +20,44 @@ type Visit = {
 
 export default function AdminDashboard() {
   const { firestore, auth } = useFirebase();
+  const { user, isUserLoading } = useUser();
 
   useEffect(() => {
     // Silently sign in as an anonymous user to be able to read from firestore
-    if (auth) {
+    // if there isn't already a user.
+    if (auth && !user && !isUserLoading) {
         signInAnonymously(auth).catch((error) => {
             console.error("Anonymous sign-in failed", error);
         });
     }
-  }, [auth]);
+  }, [auth, user, isUserLoading]);
 
 
-  // Memoize the queries to prevent re-creation on every render
-  const allVisitsQuery = useMemoFirebase(() => collection(firestore, 'visits'), [firestore]);
+  // Memoize the queries to prevent re-creation on every render.
+  // Crucially, we only create the query if we have a user, preventing permission errors.
+  const allVisitsQuery = useMemoFirebase(() => {
+    if (!user) return null;
+    return collection(firestore, 'visits');
+  }, [firestore, user]);
+
   const recentVisitsQuery = useMemoFirebase(() => {
+    if (!user) return null;
     const oneDayAgo = new Date();
     oneDayAgo.setDate(oneDayAgo.getDate() - 1);
     return query(collection(firestore, 'visits'), where('timestamp', '>=', oneDayAgo));
-  }, [firestore]);
+  }, [firestore, user]);
 
   // Fetch the data using the useCollection hook
   const { data: allVisits, isLoading: isLoadingAll } = useCollection<Visit>(allVisitsQuery);
   const { data: recentVisits, isLoading: isLoadingRecent } = useCollection<Visit>(recentVisitsQuery);
+  
+  const totalVisits = isUserLoading || isLoadingAll ? 'Loading...' : allVisits?.length.toLocaleString() ?? '0';
+  const activeVisits = isUserLoading || isLoadingRecent ? 'Loading...' : recentVisits?.length.toLocaleString() ?? '0';
 
   const stats = {
-    totalUsers: isLoadingAll ? 'Loading...' : allVisits?.length.toLocaleString() ?? '0',
+    totalUsers: totalVisits,
     newUsers: '150', // Placeholder, as "new users" is more complex to define
-    activeUsers: isLoadingRecent ? 'Loading...' : recentVisits?.length.toLocaleString() ?? '0',
+    activeUsers: activeVisits,
   };
 
   return (
