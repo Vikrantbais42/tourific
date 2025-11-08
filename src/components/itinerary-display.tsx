@@ -119,7 +119,7 @@ export default function ItineraryDisplay({ itinerary, currency }: ItineraryDispl
         </div>
         
         <div className="flex justify-end">
-            <Button onClick={handleDownloadPdf} disabled={isDownloading}>
+            <Button onClick={handleDownloadPdf} disabled={isDownloading} className="bg-accent hover:bg-accent/90">
                 {isDownloading ? (
                     <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Downloading...</>
                 ) : (
