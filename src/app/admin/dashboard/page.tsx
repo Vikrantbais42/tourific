@@ -2,7 +2,7 @@
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, UserPlus, Activity, LogOut } from "lucide-react";
+import { Users, UserPlus, Activity, LogOut, KeyRound } from "lucide-react";
 import { logout } from "../actions";
 import { Button } from "@/components/ui/button";
 import { useCollection } from '@/firebase/firestore/use-collection';
@@ -117,7 +117,33 @@ export default function AdminDashboard() {
                     </CardContent>
                 </Card>
             </div>
-            <VisitsChart visits={allVisits} isLoading={isUserLoading || isLoadingAll} />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <VisitsChart visits={allVisits} isLoading={isUserLoading || isLoadingAll} />
+                <Card>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="text-sm font-medium">Configure Gemini API Key</CardTitle>
+                        <KeyRound className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-sm text-muted-foreground mb-4">
+                            To enable the AI features of this application, you need to provide a Gemini API key.
+                        </p>
+                        <div className="p-4 rounded-lg bg-background border">
+                            <p className="font-semibold">How to set your API Key:</p>
+                            <ol className="list-decimal list-inside text-sm text-muted-foreground mt-2 space-y-1">
+                                <li>Go to your project's hosting environment settings.</li>
+                                <li>Find the section for "Environment Variables".</li>
+                                <li>Add a new variable with the name <code className="bg-secondary px-1 py-0.5 rounded text-primary font-mono">GEMINI_API_KEY</code>.</li>
+                                <li>Set the value to your actual Gemini API key.</li>
+                                <li>Redeploy your application for the changes to take effect.</li>
+                            </ol>
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-4">
+                           For security reasons, your API key must be stored as a server-side environment variable and should not be stored in the database or exposed to the client-side code.
+                        </p>
+                    </CardContent>
+                </Card>
+            </div>
         </main>
     </div>
   );
