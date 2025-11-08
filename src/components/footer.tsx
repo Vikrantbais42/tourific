@@ -22,7 +22,7 @@ export default function Footer() {
             Crafting your perfect journey, one itinerary at a time. Let Tourific be your guide to unforgettable adventures.
           </p>
           <div className="flex items-center space-x-6 mt-6">
-            <Link href="#" className="text-sm hover:text-accent transition-colors">
+            <Link href="/about" className="text-sm hover:text-accent transition-colors">
               About
             </Link>
             <Link href="#" className="text-sm hover:text-accent transition-colors">
