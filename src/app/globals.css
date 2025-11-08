@@ -60,6 +60,6 @@
 
 @layer components {
   .parallax {
-    background-attachment: fixed;
+    @apply md:bg-fixed;
   }
 }
