@@ -34,7 +34,7 @@ export default function ItineraryForm({ onSubmit, isLoading }: ItineraryFormProp
   });
 
   return (
-    <Card className="shadow-lg border-2 border-primary/20">
+    <Card className="shadow-lg border-2 border-accent/20">
         <CardHeader className="text-center">
             <CardTitle className="font-poppins text-2xl">Plan Your Next Adventure</CardTitle>
             <CardDescription>Fill out the details below to get started.</CardDescription>
