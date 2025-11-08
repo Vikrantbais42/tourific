@@ -9,7 +9,7 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center gap-2">
-                <Sailboat className="h-8 w-8 text-primary" />
+                <Sailboat className="h-8 w-8 text-accent" />
                 <h1 className="text-2xl font-bold text-foreground font-poppins">Tourific</h1>
             </Link>
           </div>
