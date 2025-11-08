@@ -20,7 +20,7 @@ export default function Header() {
              <Button variant="ghost" asChild><Link href="/#how-it-works">How it Works</Link></Button>
              <Button variant="ghost" asChild><Link href="/#features">Features</Link></Button>
              <Button variant="ghost" asChild><Link href="/about">About Us</Link></Button>
-             <Button variant="ghost" asChild><Link href="/contact">Contact</Link></Button>
+             <Button variant="ghost" asChild><Link href="/contact">Contact Us</Link></Button>
           </nav>
           <div className="hidden md:block">
             <Button className="bg-accent hover:bg-accent/90 text-accent-foreground" asChild>
@@ -41,7 +41,7 @@ export default function Header() {
                          <Link href="/#how-it-works" className="font-medium">How it Works</Link>
                          <Link href="/#features" className="font-medium">Features</Link>
                          <Link href="/about" className="font-medium">About Us</Link>
-                         <Link href="/contact" className="font-medium">Contact</Link>
+                         <Link href="/contact" className="font-medium">Contact Us</Link>
                          <Button className="bg-accent hover:bg-accent/90 text-accent-foreground mt-4" asChild>
                             <Link href="/#planner">Get Started</Link>
                         </Button>
