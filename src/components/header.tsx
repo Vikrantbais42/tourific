@@ -17,9 +17,9 @@ export default function Header() {
           </div>
           <nav className="hidden md:flex items-center space-x-2">
              <Button variant="ghost" asChild><Link href="/">Home</Link></Button>
-             <Button variant="ghost" asChild><Link href="/about">About Us</Link></Button>
-             <Button variant="ghost" asChild><Link href="/#features">Features</Link></Button>
              <Button variant="ghost" asChild><Link href="/#how-it-works">How it Works</Link></Button>
+             <Button variant="ghost" asChild><Link href="/#features">Features</Link></Button>
+             <Button variant="ghost" asChild><Link href="/about">About Us</Link></Button>
              <Button variant="ghost" asChild><Link href="/contact">Contact</Link></Button>
           </nav>
           <div className="hidden md:block">
@@ -38,9 +38,9 @@ export default function Header() {
                 <SheetContent side="right" className="w-3/4">
                      <nav className="flex flex-col gap-4 pt-6">
                          <Link href="/" className="font-medium">Home</Link>
-                         <Link href="/about" className="font-medium">About Us</Link>
-                         <Link href="/#features" className="font-medium">Features</Link>
                          <Link href="/#how-it-works" className="font-medium">How it Works</Link>
+                         <Link href="/#features" className="font-medium">Features</Link>
+                         <Link href="/about" className="font-medium">About Us</Link>
                          <Link href="/contact" className="font-medium">Contact</Link>
                          <Button className="bg-accent hover:bg-accent/90 text-accent-foreground mt-4" asChild>
                             <Link href="/#planner">Get Started</Link>
