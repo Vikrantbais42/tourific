@@ -35,14 +35,16 @@ export default function AboutPage() {
                                 </p>
                             </div>
                              {aboutImage && (
-                                <div className="relative w-full h-96 rounded-lg overflow-hidden shadow-xl">
-                                    <Image
-                                        src={aboutImage.imageUrl}
-                                        alt={aboutImage.description}
-                                        fill
-                                        className="object-cover"
-                                        data-ai-hint={aboutImage.imageHint}
-                                    />
+                                <div className="aspect-w-16 aspect-h-9 w-full rounded-lg overflow-hidden shadow-xl">
+                                    <div className="relative w-full h-96">
+                                        <Image
+                                            src={aboutImage.imageUrl}
+                                            alt={aboutImage.description}
+                                            fill
+                                            className="object-cover"
+                                            data-ai-hint={aboutImage.imageHint}
+                                        />
+                                    </div>
                                 </div>
                             )}
                         </div>
