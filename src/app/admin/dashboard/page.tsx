@@ -5,8 +5,11 @@ import { Users, UserPlus, Activity, LogOut } from "lucide-react";
 import { logout } from "../actions";
 import { Button } from "@/components/ui/button";
 import { useCollection } from '@/firebase/firestore/use-collection';
-import { collection, query, where } from 'firebase/firestore';
-import { useFirestore, useMemoFirebase } from '@/firebase';
+import { collection, query, where, getFirestore } from 'firebase/firestore';
+import { useFirestore, useMemoFirebase, useFirebase } from '@/firebase';
+import { useEffect } from 'react';
+import { signInAnonymously } from 'firebase/auth';
+
 
 // Define a type for your visit data for type safety
 type Visit = {
@@ -15,7 +18,17 @@ type Visit = {
 };
 
 export default function AdminDashboard() {
-  const firestore = useFirestore();
+  const { firestore, auth } = useFirebase();
+
+  useEffect(() => {
+    // Silently sign in as an anonymous user to be able to read from firestore
+    if (auth) {
+        signInAnonymously(auth).catch((error) => {
+            console.error("Anonymous sign-in failed", error);
+        });
+    }
+  }, [auth]);
+
 
   // Memoize the queries to prevent re-creation on every render
   const allVisitsQuery = useMemoFirebase(() => collection(firestore, 'visits'), [firestore]);
