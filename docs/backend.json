@@ -1,0 +1,128 @@
+{
+  "entities": {
+    "UserProfile": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "UserProfile",
+      "type": "object",
+      "description": "Represents a user profile with their preferences and search history.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the UserProfile entity."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user.",
+          "format": "email"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name of the user."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the user."
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "firstName",
+        "lastName"
+      ]
+    },
+    "SearchQuery": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "SearchQuery",
+      "type": "object",
+      "description": "Represents a user's search query for tour itineraries.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the SearchQuery entity."
+        },
+        "userProfileId": {
+          "type": "string",
+          "description": "Reference to UserProfile. (Relationship: UserProfile 1:N SearchQuery)"
+        },
+        "budget": {
+          "type": "number",
+          "description": "The user's budget for the tour."
+        },
+        "numberOfDays": {
+          "type": "number",
+          "description": "The number of days for the tour."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location for the tour."
+        },
+        "tourType": {
+          "type": "string",
+          "description": "The type of tour (e.g., adventure, cultural, relaxation)."
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Timestamp of when the search query was made.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userProfileId",
+        "budget",
+        "numberOfDays",
+        "location",
+        "tourType",
+        "timestamp"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "users/{userId}",
+        "definition": {
+          "entityName": "UserProfile",
+          "schema": {
+            "$ref": "#/backend/entities/UserProfile"
+          },
+          "description": "Stores user profile data. Path-based ownership ensures only the authenticated user can access their profile.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "users/{userId}/search_queries/{searchQueryId}",
+        "definition": {
+          "entityName": "SearchQuery",
+          "schema": {
+            "$ref": "#/backend/entities/SearchQuery"
+          },
+          "description": "Stores search queries associated with a user profile. Path-based ownership ensures only the authenticated user can access their own search queries.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user."
+            },
+            {
+              "name": "searchQueryId",
+              "description": "The unique identifier of the search query."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore data structure is designed to support the Tourific application's features, focusing on user profiles and search queries.  It employs path-based ownership for user profiles and their associated search queries, ensuring data isolation and simplified security rules. This structure facilitates straightforward authorization rules based solely on `request.auth.uid`, without requiring complex `get()` calls, thus ensuring Authorization Independence. The `users/{userId}/search_queries/{searchQueryId}` path directly associates search queries with user profiles and guarantees that only the authenticated user can access their own data, providing QAPs. By enforcing a clear ownership model, we avoid the need for complex filtering logic in our security rules, further simplifying the system."
+  }
+}

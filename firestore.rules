@@ -1,0 +1,77 @@
+/**
+ * @fileoverview Firestore Security Rules for Tourific application.
+ *
+ * Core Philosophy:
+ * This ruleset enforces a strict user-ownership model.  Each user can only
+ * access their own profile data and the search queries associated with their profile.
+ *
+ * Data Structure:
+ * - User profiles are stored under `/users/{userId}`.
+ * - Search queries for a user are stored under `/users/{userId}/search_queries/{searchQueryId}`.
+ *
+ * Key Security Decisions:
+ * - Users can only read and write their own profile data.
+ * - Users can only read and write their own search queries.
+ * - Listing of all users is disallowed.
+ * - No data validation is performed, focusing on rapid prototyping.
+ *
+ * Denormalization for Authorization:
+ * - The `userProfileId` field within the `SearchQuery` documents MUST match the `userId`
+ *   in the path `/users/{userId}/search_queries/{searchQueryId}`. This redundancy allows
+ *   for efficient security rules without additional `get()` calls.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * @description Controls access to user profile documents.
+     * @path /users/{userId}
+     * @allow (create) - User with UID 'user_abc' can create their own profile at /users/user_abc.
+     * @allow (get, update, delete) - User with UID 'user_abc' can read, update, and delete their own profile at /users/user_abc.
+     * @deny (create, get, update, delete) - User with UID 'user_xyz' cannot access profile data at /users/user_abc.
+     * @principle Enforces document ownership for all operations.
+     */
+    match /users/{userId} {
+      function isOwner(userId) {
+        return request.auth.uid == userId;
+      }
+
+      function isExistingOwner(userId) {
+        return isOwner(userId) && resource != null;
+      }
+
+      allow get: if isOwner(userId);
+      allow list: if false; // Listing all users is not permitted
+
+      allow create: if isOwner(userId);
+      allow update: if isExistingOwner(userId);
+      allow delete: if isExistingOwner(userId);
+    }
+
+    /**
+     * @description Controls access to search query documents nested under a user profile.
+     * @path /users/{userId}/search_queries/{searchQueryId}
+     * @allow (create) - User with UID 'user_abc' can create a search query under /users/user_abc/search_queries/{searchQueryId}.
+     * @allow (get, update, delete) - User with UID 'user_abc' can read, update, and delete their own search query under /users/user_abc/search_queries/{searchQueryId}.
+     * @deny (create, get, update, delete) - User with UID 'user_xyz' cannot access search queries under /users/user_abc.
+     * @principle Enforces document ownership for all operations. Validates the consistency of userProfileId.
+     */
+    match /users/{userId}/search_queries/{searchQueryId} {
+      function isOwner(userId) {
+        return request.auth.uid == userId;
+      }
+
+      function isExistingOwner(userId) {
+        return isOwner(userId) && resource != null;
+      }
+
+      allow get: if isOwner(userId);
+      allow list: if isOwner(userId);
+
+      allow create: if isOwner(userId);
+      allow update: if isExistingOwner(userId);
+      allow delete: if isExistingOwner(userId);
+    }
+  }
+}
