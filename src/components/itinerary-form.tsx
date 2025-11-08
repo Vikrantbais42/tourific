@@ -8,7 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { User, Users, Home, Heart, Sparkles } from 'lucide-react';
+import { User, Users, Home, Heart, Sparkles, Loader2 } from 'lucide-react';
 
 const formSchema = z.object({
   budget: z.coerce.number().min(1, 'Budget is required.'),
@@ -143,8 +143,17 @@ export default function ItineraryForm({ onSubmit, isLoading }: ItineraryFormProp
                     </div>
                 </div>
                 <Button type="submit" disabled={isLoading} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-lg py-6">
-                    {isLoading ? 'Generating...' : 'Create My Itinerary'}
-                    <Sparkles className="ml-2 h-5 w-5" />
+                    {isLoading ? (
+                        <>
+                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                            Generating...
+                        </>
+                    ) : (
+                        <>
+                            Create My Itinerary
+                            <Sparkles className="ml-2 h-5 w-5" />
+                        </>
+                    )}
                 </Button>
                 </form>
             </Form>
