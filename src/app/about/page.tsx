@@ -45,7 +45,7 @@ export default function AboutPage() {
                                 </p>
                             </div>
                              {aboutImage && (
-                                <div className="relative w-full h-80 md:h-96 rounded-lg overflow-hidden shadow-xl">
+                                <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-xl">
                                     <Image
                                         src={aboutImage.imageUrl}
                                         alt={aboutImage.description}
