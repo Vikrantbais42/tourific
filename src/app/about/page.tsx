@@ -1,3 +1,4 @@
+
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import Image from 'next/image';
@@ -6,16 +7,25 @@ import { Sailboat, Users, Target } from 'lucide-react';
 
 export default function AboutPage() {
     const aboutImage = PlaceHolderImages.find(p => p.id === 'feature-itinerary');
+    const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
 
     return (
         <>
             <Header />
             <main className="flex-grow bg-background">
                 {/* Hero Section */}
-                <section className="relative py-24 sm:py-32 text-center bg-secondary">
-                     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <section className="relative py-24 sm:py-32 text-center text-white">
+                    {heroImage && (
+                        <div
+                            className="absolute inset-0 bg-cover bg-center parallax"
+                            style={{ backgroundImage: `url(${heroImage.imageUrl})` }}
+                            data-ai-hint={heroImage.imageHint}
+                        />
+                    )}
+                     <div className="absolute inset-0 bg-black/50" />
+                     <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
                         <h1 className="text-4xl font-poppins font-bold tracking-tight sm:text-5xl lg:text-6xl">About Tourific</h1>
-                        <p className="mt-6 text-lg max-w-3xl mx-auto text-muted-foreground">
+                        <p className="mt-6 text-lg max-w-3xl mx-auto text-gray-200">
                             We believe travel should be personal, seamless, and unforgettable. Discover the story behind our revolutionary AI-powered travel planner.
                         </p>
                     </div>
