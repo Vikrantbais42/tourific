@@ -18,7 +18,7 @@ export default function Header() {
              <Button variant="ghost" asChild><Link href="/about">About Us</Link></Button>
              <Button variant="ghost" asChild><Link href="/#features">Features</Link></Button>
              <Button variant="ghost" asChild><Link href="/#how-it-works">How it Works</Link></Button>
-             <Button variant="ghost">Contact</Button>
+             <Button variant="ghost" asChild><Link href="/contact">Contact</Link></Button>
           </nav>
           <Button className="bg-accent hover:bg-accent/90 text-accent-foreground" asChild>
             <Link href="/#planner">Get Started</Link>
