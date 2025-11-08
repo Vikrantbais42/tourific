@@ -27,7 +27,7 @@ export default function Footer() {
               About
             </Link>
             <Link href="/contact" className="text-sm hover:text-accent transition-colors">
-              Contact
+              Contact Us
             </Link>
             <Link href="/privacy" className="text-sm hover:text-accent transition-colors">
               Privacy
@@ -40,6 +40,9 @@ export default function Footer() {
         <div className="border-t border-gray-700 mt-8 pt-6 text-center">
             <p className="text-sm text-gray-400">
                 &copy; {new Date().getFullYear()} Tourific. All rights reserved.
+            </p>
+            <p className="text-sm text-gray-500 mt-2">
+                Made By Vikrant
             </p>
         </div>
       </div>
