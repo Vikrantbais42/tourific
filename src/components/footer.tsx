@@ -41,7 +41,7 @@ export default function Footer() {
             <p className="text-sm text-gray-400">
                 &copy; {new Date().getFullYear()} Tourific. All rights reserved.
             </p>
-            <p className="text-sm text-gray-500 mt-2">
+            <p className="text-sm text-gray-300 mt-2">
                 Made By Vikrant
             </p>
         </div>
