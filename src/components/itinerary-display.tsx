@@ -7,7 +7,7 @@ import { TourItineraryOutput } from '@/ai/flows/generate-tour-itinerary';
 import { recommendAlternativesAction } from '@/app/actions';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from './ui/button';
-import { Sparkles, Clock, Wallet, Download, Loader2 } from 'lucide-react';
+import { Sparkles, Clock, Wallet, Download, Loader2, Sailboat } from 'lucide-react';
 import { Textarea } from './ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { RecommendTourAlternativesOutput } from '@/ai/flows/recommend-tour-alternatives';
@@ -81,6 +81,7 @@ export default function ItineraryDisplay({ itinerary, currency }: ItineraryDispl
             const canvas = await html2canvas(content, {
                 scale: 2, // Higher scale for better quality
                 useCORS: true,
+                backgroundColor: null, // Use transparent background
             });
             const imgData = canvas.toDataURL('image/png');
             
@@ -127,7 +128,14 @@ export default function ItineraryDisplay({ itinerary, currency }: ItineraryDispl
             </Button>
         </div>
 
-        <div ref={itineraryContentRef} className="bg-background p-4 sm:p-8 rounded-lg">
+        <div ref={itineraryContentRef} className="bg-background p-8 rounded-lg">
+             <div className="mb-8 p-4 bg-secondary rounded-lg">
+                <div className="flex items-center gap-2">
+                    <Sailboat className="h-8 w-8 text-accent" />
+                    <h1 className="text-2xl font-bold text-foreground font-poppins">Tourific</h1>
+                </div>
+                <h2 className="text-xl font-poppins font-semibold mt-2 text-primary">{itinerary.tourTitle}</h2>
+            </div>
             <Accordion type="multiple" defaultValue={allDays} className="w-full">
                 {itinerary.itinerary.map((dayPlan, index) => (
                     <AccordionItem value={`day-${index + 1}`} key={index}>
