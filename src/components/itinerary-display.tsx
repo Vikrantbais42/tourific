@@ -35,6 +35,9 @@ export default function ItineraryDisplay({ itinerary, currency }: ItineraryDispl
     const { toast } = useToast();
     const currencySymbol = currencySymbols[currency] || currency;
     const itineraryContentRef = useRef<HTMLDivElement>(null);
+    
+    // Create an array of all day values to expand all accordion items by default
+    const allDays = itinerary.itinerary.map((_, index) => `day-${index + 1}`);
 
 
     const handleGetAlternatives = async () => {
@@ -125,7 +128,7 @@ export default function ItineraryDisplay({ itinerary, currency }: ItineraryDispl
         </div>
 
         <div ref={itineraryContentRef} className="bg-background p-4 sm:p-8 rounded-lg">
-            <Accordion type="single" collapsible defaultValue="day-1" className="w-full">
+            <Accordion type="multiple" defaultValue={allDays} className="w-full">
                 {itinerary.itinerary.map((dayPlan, index) => (
                     <AccordionItem value={`day-${index + 1}`} key={index}>
                         <AccordionTrigger className="text-2xl font-poppins font-semibold py-4">Day {dayPlan.day}: {dayPlan.title}</AccordionTrigger>
