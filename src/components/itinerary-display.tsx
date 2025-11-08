@@ -1,11 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import { TourItineraryOutput } from '@/ai/flows/generate-tour-itinerary';
 import { recommendAlternativesAction } from '@/app/actions';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from './ui/button';
-import { Sparkles, Clock, Wallet } from 'lucide-react';
+import { Sparkles, Clock, Wallet, Download, Loader2 } from 'lucide-react';
 import { Textarea } from './ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { RecommendTourAlternativesOutput } from '@/ai/flows/recommend-tour-alternatives';
@@ -29,8 +31,11 @@ export default function ItineraryDisplay({ itinerary, currency }: ItineraryDispl
     const [preferences, setPreferences] = useState('');
     const [alternatives, setAlternatives] = useState<RecommendTourAlternativesOutput | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [isDownloading, setIsDownloading] = useState(false);
     const { toast } = useToast();
     const currencySymbol = currencySymbols[currency] || currency;
+    const itineraryContentRef = useRef<HTMLDivElement>(null);
+
 
     const handleGetAlternatives = async () => {
         setIsLoading(true);
@@ -56,6 +61,50 @@ export default function ItineraryDisplay({ itinerary, currency }: ItineraryDispl
             });
         }
     };
+    
+    const handleDownloadPdf = async () => {
+        const content = itineraryContentRef.current;
+        if (!content) {
+            toast({
+                variant: 'destructive',
+                title: 'Error',
+                description: 'Could not capture itinerary content.',
+            });
+            return;
+        }
+
+        setIsDownloading(true);
+        try {
+            const canvas = await html2canvas(content, {
+                scale: 2, // Higher scale for better quality
+                useCORS: true,
+            });
+            const imgData = canvas.toDataURL('image/png');
+            
+            const pdf = new jsPDF({
+                orientation: 'portrait',
+                unit: 'px',
+                format: [canvas.width, canvas.height],
+            });
+
+            pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+            pdf.save(`Tourific_Itinerary_${itinerary.tourTitle.replace(/\s+/g, '_')}.pdf`);
+            
+            toast({
+                title: 'Download Started',
+                description: 'Your itinerary is being downloaded as a PDF.',
+            });
+
+        } catch (error) {
+             toast({
+                variant: 'destructive',
+                title: 'PDF Generation Failed',
+                description: 'An unexpected error occurred while creating the PDF.',
+            });
+        } finally {
+            setIsDownloading(false);
+        }
+    };
 
 
   return (
@@ -64,37 +113,49 @@ export default function ItineraryDisplay({ itinerary, currency }: ItineraryDispl
             <h1 className="text-4xl font-poppins font-bold tracking-tight">{itinerary.tourTitle}</h1>
             <p className="text-muted-foreground text-lg">Your personalized journey awaits.</p>
         </div>
+        
+        <div className="flex justify-end">
+            <Button onClick={handleDownloadPdf} disabled={isDownloading}>
+                {isDownloading ? (
+                    <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Downloading...</>
+                ) : (
+                    <><Download className="mr-2 h-4 w-4" />Download PDF</>
+                )}
+            </Button>
+        </div>
 
-        <Accordion type="single" collapsible defaultValue="day-1" className="w-full">
-            {itinerary.itinerary.map((dayPlan, index) => (
-                <AccordionItem value={`day-${index + 1}`} key={index}>
-                    <AccordionTrigger className="text-2xl font-poppins font-semibold py-4">Day {dayPlan.day}: {dayPlan.title}</AccordionTrigger>
-                    <AccordionContent className="pl-2 space-y-4 border-l-2 border-primary ml-2">
-                        {dayPlan.activities.map((activity, actIndex) => (
-                            <Card key={actIndex} className="shadow-md hover:shadow-lg transition-shadow ml-4 relative before:content-[''] before:absolute before:left-[-25px] before:top-8 before:w-4 before:h-4 before:bg-primary before:rounded-full before:border-4 before:border-background">
-                                <CardHeader>
-                                     <div className="flex justify-between items-start">
-                                        <CardTitle className="text-xl font-semibold mb-2">{activity.title}</CardTitle>
-                                         {activity.cost !== undefined && activity.cost > 0 && (
-                                            <div className="flex items-center gap-2 text-sm font-medium bg-secondary text-secondary-foreground px-3 py-1 rounded-full">
-                                                <Wallet className="w-4 h-4 text-muted-foreground"/>
-                                                <span>{currencySymbol}{activity.cost}</span>
-                                            </div>
-                                        )}
-                                    </div>
-                                    <CardDescription className="flex items-center gap-2 pt-1 text-primary">
-                                        <Clock className="w-4 h-4"/> <span>{activity.time}</span>
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="text-muted-foreground">{activity.description}</p>
-                                </CardContent>
-                            </Card>
-                        ))}
-                    </AccordionContent>
-                </AccordionItem>
-            ))}
-        </Accordion>
+        <div ref={itineraryContentRef} className="bg-background p-4 sm:p-8 rounded-lg">
+            <Accordion type="single" collapsible defaultValue="day-1" className="w-full">
+                {itinerary.itinerary.map((dayPlan, index) => (
+                    <AccordionItem value={`day-${index + 1}`} key={index}>
+                        <AccordionTrigger className="text-2xl font-poppins font-semibold py-4">Day {dayPlan.day}: {dayPlan.title}</AccordionTrigger>
+                        <AccordionContent className="pl-2 space-y-4 border-l-2 border-primary ml-2">
+                            {dayPlan.activities.map((activity, actIndex) => (
+                                <Card key={actIndex} className="shadow-md hover:shadow-lg transition-shadow ml-4 relative before:content-[''] before:absolute before:left-[-25px] before:top-8 before:w-4 before:h-4 before:bg-primary before:rounded-full before:border-4 before:border-background">
+                                    <CardHeader>
+                                         <div className="flex justify-between items-start">
+                                            <CardTitle className="text-xl font-semibold mb-2">{activity.title}</CardTitle>
+                                             {activity.cost !== undefined && activity.cost > 0 && (
+                                                <div className="flex items-center gap-2 text-sm font-medium bg-secondary text-secondary-foreground px-3 py-1 rounded-full">
+                                                    <Wallet className="w-4 h-4 text-muted-foreground"/>
+                                                    <span>{currencySymbol}{activity.cost}</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                        <CardDescription className="flex items-center gap-2 pt-1 text-primary">
+                                            <Clock className="w-4 h-4"/> <span>{activity.time}</span>
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <p className="text-muted-foreground">{activity.description}</p>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </AccordionContent>
+                    </AccordionItem>
+                ))}
+            </Accordion>
+        </div>
         
         <Card className="bg-secondary/50 border-dashed">
             <CardHeader>
