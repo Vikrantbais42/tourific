@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,8 +6,7 @@ import { logout } from "../actions";
 import { Button } from "@/components/ui/button";
 import { useCollection } from '@/firebase/firestore/use-collection';
 import { collection, query, where } from 'firebase/firestore';
-import { useFirestore } from '@/firebase';
-import { useMemo } from 'react';
+import { useFirestore, useMemoFirebase } from '@/firebase';
 
 // Define a type for your visit data for type safety
 type Visit = {
@@ -20,8 +18,8 @@ export default function AdminDashboard() {
   const firestore = useFirestore();
 
   // Memoize the queries to prevent re-creation on every render
-  const allVisitsQuery = useMemo(() => collection(firestore, 'visits'), [firestore]);
-  const recentVisitsQuery = useMemo(() => {
+  const allVisitsQuery = useMemoFirebase(() => collection(firestore, 'visits'), [firestore]);
+  const recentVisitsQuery = useMemoFirebase(() => {
     const oneDayAgo = new Date();
     oneDayAgo.setDate(oneDayAgo.getDate() - 1);
     return query(collection(firestore, 'visits'), where('timestamp', '>=', oneDayAgo));
