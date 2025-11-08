@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Sailboat } from 'lucide-react';
@@ -28,10 +29,10 @@ export default function Footer() {
             <Link href="/contact" className="text-sm hover:text-accent transition-colors">
               Contact
             </Link>
-            <Link href="#" className="text-sm hover:text-accent transition-colors">
+            <Link href="/privacy" className="text-sm hover:text-accent transition-colors">
               Privacy
             </Link>
-            <Link href="#" className="text-sm hover:text-accent transition-colors">
+            <Link href="/terms" className="text-sm hover:text-accent transition-colors">
               Terms
             </Link>
           </div>
