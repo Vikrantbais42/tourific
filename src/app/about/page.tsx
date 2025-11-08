@@ -34,7 +34,7 @@ export default function AboutPage() {
                 {/* Our Story Section */}
                 <section className="py-16 sm:py-24">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="grid md:grid-cols-2 gap-12 items-center">
+                        <div className="max-w-3xl mx-auto text-center">
                             <div className="space-y-4">
                                 <h2 className="text-3xl font-poppins font-bold tracking-tight sm:text-4xl">Our Story</h2>
                                 <p className="text-lg text-muted-foreground">
@@ -44,17 +44,6 @@ export default function AboutPage() {
                                     We brought together a team of passionate travelers, designers, and AI experts to create a platform that understands your unique travel style. Tourific isn't just about booking flights and hotels; it's about crafting personalized experiences that resonate with your dreams.
                                 </p>
                             </div>
-                             {aboutImage && (
-                                <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-xl">
-                                    <Image
-                                        src={aboutImage.imageUrl}
-                                        alt={aboutImage.description}
-                                        fill
-                                        className="object-cover"
-                                        data-ai-hint={aboutImage.imageHint}
-                                    />
-                                </div>
-                            )}
                         </div>
                     </div>
                 </section>
