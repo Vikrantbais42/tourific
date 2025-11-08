@@ -1,7 +1,7 @@
 'use client';
 
 import { TrendingUp } from 'lucide-react';
-import { CartesianGrid, Line, LineChart, XAxis, Tooltip, YAxis } from 'recharts';
+import { CartesianGrid, Line, LineChart, XAxis, Tooltip, YAxis, Area, AreaChart } from 'recharts';
 import {
   Card,
   CardContent,
@@ -83,7 +83,7 @@ export default function VisitsChart({ visits, isLoading }: VisitsChartProps) {
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-72 w-full">
-          <LineChart
+          <AreaChart
             accessibilityLayer
             data={chartData}
             margin={{
@@ -109,14 +109,29 @@ export default function VisitsChart({ visits, isLoading }: VisitsChartProps) {
               cursor={false}
               content={<ChartTooltipContent indicator="dot" />}
             />
-            <Line
+            <defs>
+                <linearGradient id="fillVisits" x1="0" y1="0" x2="0" y2="1">
+                    <stop
+                    offset="5%"
+                    stopColor="var(--color-visits)"
+                    stopOpacity={0.8}
+                    />
+                    <stop
+                    offset="95%"
+                    stopColor="var(--color-visits)"
+                    stopOpacity={0.1}
+                    />
+                </linearGradient>
+            </defs>
+            <Area
               dataKey="visits"
               type="natural"
+              fill="url(#fillVisits)"
+              fillOpacity={0.4}
               stroke="var(--color-visits)"
               strokeWidth={2}
-              dot={true}
             />
-          </LineChart>
+          </AreaChart>
         </ChartContainer>
       </CardContent>
       <CardFooter>
