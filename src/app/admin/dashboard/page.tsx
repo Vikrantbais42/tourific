@@ -47,18 +47,23 @@ export default function AdminDashboard() {
     return query(collection(firestore, 'visits'), where('timestamp', '>=', oneDayAgo));
   }, [firestore, user]);
 
+  const veryRecentVisitsQuery = useMemoFirebase(() => {
+    if (!user) return null;
+    const fiveMinutesAgo = new Date();
+    fiveMinutesAgo.setMinutes(fiveMinutesAgo.getMinutes() - 5);
+    return query(collection(firestore, 'visits'), where('timestamp', '>=', fiveMinutesAgo));
+  }, [firestore, user]);
+
+
   // Fetch the data using the useCollection hook
   const { data: allVisits, isLoading: isLoadingAll } = useCollection<Visit>(allVisitsQuery);
   const { data: recentVisits, isLoading: isLoadingRecent } = useCollection<Visit>(recentVisitsQuery);
+  const { data: veryRecentVisits, isLoading: isLoadingVeryRecent } = useCollection<Visit>(veryRecentVisitsQuery);
   
   const totalVisits = isUserLoading || isLoadingAll ? 'Loading...' : allVisits?.length.toLocaleString() ?? '0';
-  const activeVisits = isUserLoading || isLoadingRecent ? 'Loading...' : recentVisits?.length.toLocaleString() ?? '0';
+  const activeVisitsLast24h = isUserLoading || isLoadingRecent ? 'Loading...' : recentVisits?.length.toLocaleString() ?? '0';
+  const activeVisitsLast5m = isUserLoading || isLoadingVeryRecent ? 'Loading...' : veryRecentVisits?.length.toLocaleString() ?? '0';
 
-  const stats = {
-    totalUsers: totalVisits,
-    newUsers: '150', // Placeholder, as "new users" is more complex to define
-    activeUsers: activeVisits,
-  };
 
   return (
     <div className="flex min-h-screen bg-secondary">
@@ -92,18 +97,18 @@ export default function AdminDashboard() {
                         <Users className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">{stats.totalUsers}</div>
+                        <div className="text-2xl font-bold">{totalVisits}</div>
                         <p className="text-xs text-muted-foreground">All time visits to the site</p>
                     </CardContent>
                 </Card>
                  <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">New Users</CardTitle>
+                        <CardTitle className="text-sm font-medium">Active Users (5 mins)</CardTitle>
                         <UserPlus className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">{stats.newUsers}</div>
-                        <p className="text-xs text-muted-foreground">This month</p>
+                        <div className="text-2xl font-bold">{activeVisitsLast5m}</div>
+                        <p className="text-xs text-muted-foreground">Visits in the last 5 minutes</p>
                     </CardContent>
                 </Card>
                 <Card>
@@ -112,7 +117,7 @@ export default function AdminDashboard() {
                         <Activity className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">{stats.activeUsers}</div>
+                        <div className="text-2xl font-bold">{activeVisitsLast24h}</div>
                         <p className="text-xs text-muted-foreground">Visits in the last 24 hours</p>
                     </CardContent>
                 </Card>
