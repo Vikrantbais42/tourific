@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourific Application Documentation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h1 { font-size: 2.5em; }
+        h2 { font-size: 2em; }
+        h3 { font-size: 1.5em; border-bottom: 1px solid #ccc; }
+        code {
+            background-color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tourific Application Documentation</h1>
+
+        <h2>1. Project Overview</h2>
+        <p>Tourific is a modern, AI-powered web application designed to simplify travel planning. It allows users to generate personalized tour itineraries based on their preferences, such as budget, duration, location, and travel style. The application uses Google's Gemini AI (via Genkit) to create detailed, day-by-day travel plans, suggest flights, and offer alternative activities.</p>
+
+        <h2>2. Technology Stack</h2>
+        <ul>
+            <li><strong>Framework:</strong> Next.js (with App Router)</li>
+            <li><strong>Language:</strong> TypeScript</li>
+            <li><strong>Styling:</strong> Tailwind CSS</li>
+            <li><strong>UI Components:</strong> ShadCN UI</li>
+            <li><strong>AI Integration:</strong> Genkit (for Google Gemini)</li>
+            <li><strong>Database & Auth:</strong> Firebase (Firestore, Firebase Authentication)</li>
+            <li><strong>Form Management:</strong> React Hook Form with Zod for validation</li>
+            <li><strong>Icons:</strong> Lucide React</li>
+            <li><strong>Charts:</strong> Recharts</li>
+        </ul>
+
+        <h2>3. Core Features</h2>
+        <ul>
+            <li><strong>AI Itinerary Generation:</strong> Users can input their travel preferences to receive a complete, day-by-day itinerary.</li>
+            <li><strong>Popular Itineraries:</strong> A curated section of pre-defined popular travel plans that users can explore with a single click.</li>
+            <li><strong>Flight Suggestions:</strong> After an itinerary is generated, users can fetch realistic, sample flight options for their destination.</li>
+            <li><strong>AI-Powered Alternatives:</strong> Users can request alternative suggestions for activities, restaurants, or hotels within their generated itinerary.</li>
+            <li><strong>PDF Download:</strong> Itineraries can be downloaded as a beautifully formatted PDF for offline use.</li>
+            <li><strong>Admin Dashboard:</strong> A secure admin panel that provides user analytics, such as daily visit counts, with charts and statistics. It also includes instructions for securely managing the Gemini API key.</li>
+            <li><strong>Responsive Design:</strong> The application is fully responsive and works seamlessly across desktops, tablets, and mobile devices.</li>
+        </ul>
+
+        <h2>4. File Structure</h2>
+        <p>The project follows a standard Next.js App Router structure with some key additions:</p>
+        <pre>
+/
+|-- src/
+|   |-- app/                # Next.js pages and routes
+|   |   |-- admin/          # Admin panel routes
+|   |   |-- api/            # API routes (if any)
+|   |   |-- (main pages)/   # about, contact, itinerary, etc.
+|   |   |-- layout.tsx      # Root layout
+|   |   `-- page.tsx        # Home page
+|   |
+|   |-- ai/                 # Genkit AI integration
+|   |   |-- flows/          # AI flows for specific tasks (e.g., generate itinerary)
+|   |   `-- genkit.ts       # Genkit configuration
+|   |
+|   |-- components/         # Reusable React components
+|   |   |-- ui/             # ShadCN UI components
+|   |   `-- (custom)/       # Custom components (e.g., header, footer, itinerary-form)
+|   |
+|   |-- firebase/           # Firebase configuration and custom hooks
+|   |   |-- firestore/      # Firestore-specific hooks (useCollection, useDoc)
+|   |   |-- config.ts       # Firebase project configuration
+|   |   `-- index.ts        # Firebase initialization and service exports
+|   |
+|   |-- hooks/              # Custom React hooks (e.g., use-toast)
+|   |
+|   |-- lib/                # Libraries, helpers, and schemas
+|   |   |-- services/       # Business logic services
+|   |   |-- placeholder-images.json # Data for placeholder images
+|   |   |-- schema.ts       # Zod schemas for form validation
+|   |   `-- utils.ts        # Utility functions (e.g., cn for Tailwind)
+|   |
+|   `-- middleware.ts       # Next.js middleware for route protection (admin panel)
+|
+|-- public/                 # Static assets
+|-- firestore.rules         # Firestore security rules
+|-- package.json            # Project dependencies and scripts
+`-- tailwind.config.ts      # Tailwind CSS configuration
+        </pre>
+
+        <h2>5. Setup and Local Development</h2>
+        <h3>Prerequisites</h3>
+        <ul>
+            <li>Node.js (v18 or later)</li>
+            <li>npm, yarn, or pnpm</li>
+        </ul>
+        <h3>Installation</h3>
+        <p>Clone the repository and install the dependencies:</p>
+        <pre><code>npm install</code></pre>
+        
+        <h3>Environment Variables</h3>
+        <p>The application requires a Google Gemini API key to power its AI features. You must set this key as an environment variable in your hosting environment.</p>
+        <p>For local development, create a <code>.env</code> file in the root of the project and add your key:</p>
+        <pre><code>GEMINI_API_KEY=your_gemini_api_key_here</code></pre>
+
+        <h3>Running the Development Server</h3>
+        <p>Start the Next.js development server:</p>
+        <pre><code>npm run dev</code></pre>
+        <p>The application will be available at <a href="http://localhost:9002">http://localhost:9002</a>.</p>
+    </div>
+</body>
+</html>
