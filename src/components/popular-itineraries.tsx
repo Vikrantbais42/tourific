@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useRouter } from 'next/navigation';
@@ -72,8 +71,11 @@ export default function PopularItineraries() {
   const router = useRouter();
   const bgImage = PlaceHolderImages.find(p => p.id === 'popular-itineraries-bg');
 
-  const handleCardClick = (params: any) => {
-    const query = new URLSearchParams(params);
+  const handleCardClick = (location: string, params: any) => {
+    const query = new URLSearchParams({
+        ...params,
+        location,
+    });
     router.push(`/itinerary?${query.toString()}`);
   };
 
@@ -97,7 +99,7 @@ export default function PopularItineraries() {
             <Card
               key={index}
               className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group"
-              onClick={() => handleCardClick(item.itineraryParams)}
+              onClick={() => handleCardClick(item.location, item.itineraryParams)}
             >
               <div className="relative h-48 w-full">
                 <Image
