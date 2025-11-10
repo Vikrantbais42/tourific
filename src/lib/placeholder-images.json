@@ -41,6 +41,12 @@
       "description": "Old binoculars on a wooden surface, suggesting discovery.",
       "imageUrl": "https://images.unsplash.com/photo-1508922569584-9a7442654b02?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxvbGQlMjBiaW5vY3VsYXJzfGVufDB8fHx8MTc2MjU3NTgzNnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "old binoculars"
+    },
+    {
+      "id": "popular-itineraries-bg",
+      "description": "A background for the popular itineraries section with a soft, abstract travel theme.",
+      "imageUrl": "https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0cmF2ZWwlMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc2Mjc1NDIxOHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "travel background"
     }
   ]
 }

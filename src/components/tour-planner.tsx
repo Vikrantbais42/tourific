@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useRouter } from 'next/navigation';
@@ -17,7 +18,7 @@ export default function TourPlanner() {
   return (
     <section id="planner" className="py-16 sm:py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mt-[-150px] relative z-20">
+        <div className="mt-[-200px] relative z-20">
             <ItineraryForm onSubmit={handleFormSubmit} isLoading={isLoading} />
         </div>
       </div>
