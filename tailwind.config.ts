@@ -88,9 +88,9 @@ export default {
             },
         },
         'icon-fade': {
-          '0%, 100%': { opacity: '0', transform: 'scale(0.8)' },
+          '0%': { opacity: '0', transform: 'scale(0.8)' },
           '15%, 50%': { opacity: '1', transform: 'scale(1)' },
-          '65%': { opacity: '0', transform: 'scale(0.8)' },
+          '65%, 100%': { opacity: '0', transform: 'scale(0.8)' },
         }
       },
       animation: {
