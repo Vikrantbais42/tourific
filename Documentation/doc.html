@@ -48,6 +48,13 @@
         li {
             margin-bottom: 10px;
         }
+        .note {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffeeba;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
@@ -141,6 +148,16 @@
         <p>Start the Next.js development server:</p>
         <pre><code>npm run dev</code></pre>
         <p>The application will be available at <a href="http://localhost:9002">http://localhost:9002</a>.</p>
+
+        <h2>6. Admin Panel Access</h2>
+        <p>The application includes an admin panel for viewing site analytics. You can access it by navigating to <code>/admin</code>.</p>
+        <ul>
+            <li><strong>Username:</strong> <code>admin</code></li>
+            <li><strong>Password:</strong> <code>password</code></li>
+        </ul>
+        <div class="note">
+            <strong>Note:</strong> These credentials are hardcoded for demonstration purposes. In a production environment, you should implement a secure and robust authentication system for administrative access.
+        </div>
     </div>
 </body>
 </html>

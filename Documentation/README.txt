@@ -30,8 +30,6 @@ Tourific is a modern, AI-powered web application designed to simplify travel pla
 
 4. File Structure
 -----------------
-The project follows a standard Next.js App Router structure with some key additions:
-
 /
 |-- src/
 |   |-- app/                # Next.js pages and routes
@@ -90,3 +88,12 @@ Start the Next.js development server:
 npm run dev
 
 The application will be available at http://localhost:9002.
+
+6. Admin Panel Access
+---------------------
+The application includes an admin panel for viewing site analytics. You can access it by navigating to `/admin`.
+
+- Username: admin
+- Password: password
+
+Note: These credentials are hardcoded for demonstration purposes. In a production environment, you should implement a secure and robust authentication system for administrative access.
