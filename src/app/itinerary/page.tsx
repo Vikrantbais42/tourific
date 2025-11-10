@@ -10,7 +10,7 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import FlightDetails from '@/components/flight-details';
-import Globe from '@/components/globe';
+import LoadingAnimation from '@/components/loading-animation';
 
 function ItineraryGenerator() {
   const searchParams = useSearchParams();
@@ -77,11 +77,9 @@ function ItineraryGenerator() {
   return (
     <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {isLoading && (
-        <div className="text-center flex flex-col items-center justify-center h-96">
-          <div className="w-64 h-64">
-            <Globe />
-          </div>
-          <p className="mt-4 text-muted-foreground text-lg">Generating your dream trip...</p>
+        <div className="text-center flex flex-col items-center justify-center min-h-[60vh]">
+          <LoadingAnimation />
+          <p className="mt-8 text-muted-foreground text-lg font-semibold">Generating your dream trip...</p>
           <p className="text-sm text-muted-foreground/80">Please wait, this can take a moment.</p>
         </div>
       )}
