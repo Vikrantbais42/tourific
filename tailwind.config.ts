@@ -89,17 +89,18 @@ export default {
         },
         'icon-1-fade': {
           '0%, 100%': { opacity: '0' },
-          '10%, 33%': { opacity: '1' },
-          '43%, 100%': { opacity: '0' },
+          '10%, 23%': { opacity: '1' },
+          '33%, 100%': { opacity: '0' },
         },
         'icon-2-fade': {
-            '0%, 100%': { opacity: '0' },
-            '43%, 66%': { opacity: '1' },
-            '76%, 100%': { opacity: '0' },
+          '0%, 33%': { opacity: '0' },
+          '43%, 56%': { opacity: '1' },
+          '66%, 100%': { opacity: '0' },
         },
         'icon-3-fade': {
-            '0%, 100%': { opacity: '0' },
-            '76%, 99%': { opacity: '1' },
+          '0%, 66%': { opacity: '0' },
+          '76%, 89%': { opacity: '1' },
+          '99%, 100%': { opacity: '0' },
         },
       },
       animation: {
